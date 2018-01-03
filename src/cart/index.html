@@ -1,0 +1,514 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>购物车</title>
+    <link href="https://cdn.bootcss.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+        body {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .prod-btn {
+            min-width: 120px !important;
+            padding: 0 12px !important;
+        }
+
+        /*.prod-content-detail-pricing .features-content li {*/
+        /*background: url(/etc/designs/webex/eopi/images/product/bullet.png) no-repeat 0 8px;*/
+        /*}*/
+
+        #p100 {
+            /*background: url(/content/dam/webex/eopi/Americas/USA/en_us/global/images/open-html/price_box.png) no-repeat 20px 0;*/
+            -moz-background-size: 230px 256px;
+            -webkit-background-size: 230px 256px;;
+            o-background-size: 230px 256px;
+            background-size: 230px 256px;
+            margin: 0 auto;
+        }
+
+        .prod-content-price {
+            padding: 30px 0 40px;
+        }
+
+        .prod-content-detail-pricing .price-title {
+            text-transform: capitalize !important;
+        }
+
+        .prod-content-detail-pricing .features-title {
+
+            padding-top: 42px;
+        }
+
+        .prod-content-detail-pricing .features-more {
+            padding-top: 20px;
+            padding-bottom: 50px;
+        }
+
+        a.prod-btn:focus {
+            color: #fff;
+        }
+
+        .prod-content-premium {
+            font-size: 18px;
+            color: #434343;
+            font-family: 'CiscoSansExtraLight', Arial, Helvetica, sans-serif;
+            line-height: 22px;
+        }
+
+        @media (min-width: 992px) {
+            .change-prod-content-detail {
+                padding-bottom: 40px;
+            }
+
+            .prod-content-detail-pricing .price-content {
+                height: 210px;
+            }
+
+            .prod-content-premium {
+                font-family: 'CiscoSansRegular', Arial, Helvetica, sans-serif;
+            }
+
+            .prod-content-detail-pricing .change-features-content li {
+                color: #262626;
+                margin-bottom: 7px;
+            }
+
+            .prod-content-detail-pricing .change-features-content {
+                color: #262626;
+                margin-bottom: 20px;
+            }
+
+            .prod-content-detail-pricing .features-content:nth-child(6) {
+                margin-bottom: 20px;
+            }
+
+            .prod-content-detail-pricing .price-content {
+                padding: 4px 0 0px !important;
+            }
+
+            .prod-content-detail-pricing .prod-content-price .prod-btn {
+                margin-top: 20px;
+            }
+
+            .features-content-li-space {
+                margin-top: -6px;
+            }
+
+            #navid3 .prod-content-subtitle {
+                width: 470px;
+            }
+
+            #navid1 .prod-content-detail ul {
+                width: 470px;
+            }
+
+            .prod-content-detail-pricing .features-title {
+                color: #434343;
+                padding-bottom: 12px;
+            }
+
+            .prod-content-detail-pricing .features-title {
+                padding-top: 20px;
+            }
+
+            .prod-content-premium {
+                padding-bottom: 10px;
+            }
+
+            .prod-btn {
+                height: 46px;
+                line-height: 46px;
+                min-width: 142px !important;
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 21px;
+            }
+
+            .f-space {
+                padding-top: 62px;
+            }
+
+            .change-line {
+                border-top: 1px dashed #979797;
+                margin-top: 16px;
+                margin-bottom: 16px;
+            }
+
+            .prod-content-detail-pricing .price-title {
+                font-size: 23px;
+            }
+
+            .prod-content-detail-pricing .price-content p {
+                font-size: 16px;
+                line-height: normal;
+                font-weight: 200;
+                color: #434343;
+                text-align: center;
+            }
+
+            .prod-content-detail-pricing .price-content p:first-child {
+                font-size: 16px;
+                line-height: 18px;
+                font-weight: 200;
+                color: #434343;
+            }
+
+            .prod-content-detail-pricing .price-content p span:first-child {
+                line-height: normal;
+                color: #434343;
+                font-weight: 200;
+            }
+
+            .prod-content-detail-pricing .price-content p span {
+                font-size: 48px;
+                font-weight: 200;
+                line-height: normal;
+                text-align: left;
+                color: #434343;
+            }
+
+            .prod-content-detail-pricing .price-content p span:last-child {
+                color: #434343;
+            }
+
+            .prod-content-detail-pricing {
+                border: none;
+                margin: 0 0 0;
+                padding: 10px 80px 16px;
+            }
+
+            .prod-content {
+                padding-bottom: 0;
+            }
+
+            .prod-content-detail-pricing .features-more {
+                text-align: right;
+            }
+
+            .prod-content-detail-pricing .features-tooltip {
+                right: 180px;
+            }
+
+        }
+
+        @media (max-width: 991px) and (min-width: 768px) {
+            .prod-content-detail-pricing .price-content {
+                height: 210px
+            }
+
+            .prod-content-detail-pricing .price-content p:first-child {
+                padding-bottom: 18px;
+            }
+
+            .prod-content {
+                padding-top: 56px;
+            }
+
+            .prod-content-detail-pricing {
+                padding-top: 11px;
+            }
+
+            .prod-content-detail-pricing .price-title {
+                font-size: 23px;
+            }
+
+            .prod-content-detail-pricing .features-content:nth-child(6) {
+                margin-bottom: 40px;
+            }
+
+            .prod-content-detail-pricing .price-content {
+                padding: 4px 0 0px !important;
+            }
+
+            .prod-content-detail-pricing .prod-content-price .prod-btn {
+                margin-top: 20px;
+            }
+
+            .features-content-li-space {
+                margin-top: -4px;
+            }
+
+            .prod-content-detail-pricing .features-content:nth-child(6) {
+                margin-bottom: -10px !important;
+            }
+
+            .prod-content-detail-pricing .price-content p {
+                color: #434343;
+            }
+
+            .prod-content-detail-pricing .price-content p span {
+                color: #434343;
+                font-size: 48px;
+            }
+
+            .prod-btn {
+                min-width: 142px !important;
+                padding: 0 20px !important;
+                height: 46px;
+                line-height: 46px;
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 21px;
+            }
+
+            .prod-content-price {
+                padding-bottom: 23px;
+            }
+
+            .prod-content-detail-pricing .features-title {
+                padding-top: 42px;
+                text-align: center;
+                color: #434343;
+                padding-bottom: 12px;
+            }
+
+            .prod-content-detail-pricing .features-content li {
+                font-weight: 200;
+                color: #262626;
+            }
+
+            .prod-content-detail-pricing .features-content {
+                padding-bottom: 28px;
+            }
+
+            .prod-content-premium {
+                font-family: 'CiscoSansRegular', Arial, Helvetica, sans-serif;
+                padding-bottom: 9px;
+            }
+
+            .prod-hero-ft .cta-2 {
+                margin-top: -22px;
+            }
+
+            #p100 {
+                /*background: url(/content/dam/webex/eopi/Americas/USA/en_us/global/images/open-html/price_box.png) no-repeat 10px 0;*/
+                -moz-background-size: 230px 256px;
+                -webkit-background-size: 230px 256px;
+                o-background-size: 230px 256px;
+                background-size: 230px 256px;
+            }
+
+            .prod-content-detail-pricing {
+                padding-top: 7px;
+            }
+
+            .prod-content-detail-pricing .features-more {
+                padding-bottom: 10px;
+            }
+
+            .prod-content-detail-pricing .features-tooltip {
+                top: 56px
+            }
+
+            .prod-content-detail-pricing .features-more {
+                text-align: right;
+            }
+
+            .prod-content-detail-pricing .features-tooltip {
+                right: 200px;
+                top: 30px;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .tabbedNavigation .prod-nav a:after {
+                border-left: 2px solid #0096d6 !important;
+                border-top: 2px solid #0096d6 !important;
+            }
+
+            .br-visible {
+                display: none;
+            }
+
+            .features-content-li-space {
+                margin-top: 4px !important;
+            }
+
+            .prod-content-section h3 {
+                text-align: left !important;
+            }
+
+            .prod-content-detail-pricing .div:nth-of-type(2) .prod-content-price {
+                padding: 29px 0 40px;
+            }
+
+            .row prod-content-detail-pricing .div:nth-of-type(3) .prod-content-price {
+                padding: 29px 0 40px;
+            }
+
+            .prod-content {
+                padding-top: 22px;
+            }
+
+            .prod-content-title {
+                text-align: center;
+                color: #262626;
+            }
+
+            .prod-content-detail-pricing .price-title {
+                font-size: 23px;
+            }
+
+            .prod-content-detail-pricing .price-content p {
+                color: #434343;
+            }
+
+            .prod-content-detail-pricing .price-content p span {
+                color: #434343;
+            }
+
+            .prod-content-detail-pricing .price-content p span {
+                font-size: 48px;
+                color: #434343;
+            }
+
+            .prod-btn {
+                min-width: 142px !important;
+                padding: 0 4px !important;
+                height: 46px;
+                line-height: 46px;
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 21px;
+            }
+
+            .prod-content-price {
+                padding: 29px 0 40px;
+            }
+
+            .prod-content-subtitle {
+                margin-top: 8px;
+            }
+
+            .prod-content-detail-pricing .price-content p:first-child {
+                padding-bottom: 17px;
+                padding-top: 2px;
+            }
+
+            .prod-content-detail-pricing .price-content {
+                margin-bottom: 12px;
+            }
+
+            #p100 {
+                margin-top: 0px;
+            }
+
+            .prod-content-detail-pricing .features-content + .features-content li {
+                padding-bottom: 4px;
+                color: #434343;
+            }
+
+            .prod-content-detail-pricing .features-title {
+                color: #434343;
+            }
+
+            .prod-content-premium {
+                font-family: 'CiscoSansRegular', Arial, Helvetica, sans-serif;
+                padding-top: 12px;
+            }
+
+            .prod-content {
+                padding-bottom: 58px;
+            }
+
+            .cta-2 {
+                margin-top: -12px;
+            }
+
+            .prod-content-detail-pricing .features-title {
+                font-size: 19px !important;
+            }
+        }
+
+        @media all and (max-width: 767px) {
+            #p100 {
+                width: 248px;
+                height: 256px;
+                margin: 0 auto;
+                margin-top: -10px;
+                margin-bottom: 52px;
+                background-position: 14px 0px;
+            }
+
+            .prod-content-detail-pricing {
+                padding-top: 0;
+            }
+        }
+
+        .prod-content-price .mon-price {
+            display: none;
+        }
+
+        .prod-content-price .mon-to-ann-save-info {
+            display: none;
+        }
+
+        .p8-tnt, .p25-tnt, .p200-tnt {
+            display: none
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div>我的购物车(myCart)</div>
+    <div class="tag miniCart">cart</div>
+    <div class=" row">
+        <div class="col-md-3 col-md-offset-1">
+            <div class="prod-content-price" id="p8">
+                <h6 class="price-title">premium 8</h6>
+                <div class="price-content">
+                    <p>Up to 8 people <br> per meeting</p>
+                    <p class="mon-price" style="display: none;"><span>$</span><span>24</span><span>per month</span></p>
+                    <p class="ann-price" style="display: block;"><span>$</span><span>19</span><span>per month</span></p>
+                    <p class="mon-to-ann-save-info" style="display: none;">$19/month annual plan</p>
+                    <p class="ann-save-info" style="display: block;">Save with annual</p>
+                </div>
+                <a addid="5094412400" class="prod-btn prod-btn-orange one-step-buy" href="javascript:void(0);">Buy
+                    Now</a>
+            </div>
+        </div>
+        <div class="col-md-3 col-md-offset-1">
+            <div class="prod-content-price" id="p25">
+                <h6 class="price-title">premium 25</h6>
+                <div class="price-content">
+                    <p>Up to 25 people <br> per meeting</p>
+                    <p class="mon-price" style="display: none;"><span>$</span><span>39</span><span>per month</span></p>
+                    <p class="ann-price" style="display: block;"><span>$</span><span>29</span><span>per month</span></p>
+                    <p class="mon-to-ann-save-info" style="display: none;">$29/month annual plan</p>
+                    <p class="ann-save-info" style="display: block;">Save with annual</p>
+                    <p></p>
+                    <hr style="border: 0 none; border-top: 1px dashed #979797; width:200px;  background: none;  height:0;margin-top:15px;margin-bottom: 15px;">
+                    <p></p>
+                    <p>Join with Call Me! <br> No dialing, no access codes.</p>
+                </div>
+                <a addid="5094414500" class="prod-btn prod-btn-orange one-step-buy" href="javascript:void(0);">Buy
+                    Now</a>
+            </div>
+        </div>
+        <div class="col-md-3 col-md-offset-1" id="p100" style="margin-top:0px">
+            <div class="prod-content-price" id="p200">
+                <h6 class="price-title">premium 200</h6>
+                <div class="price-content">
+                    <p>Up to 200 people <br> per meeting</p>
+                    <p class="mon-price" style="display: none;"><span>$</span><span>49</span><span>per month</span></p>
+                    <p class="ann-price" style="display: block;"><span>$</span><span>39</span><span>per month</span></p>
+                    <p class="mon-to-ann-save-info" style="display: none;">$39/month annual plan</p>
+                    <p class="ann-save-info" style="display: block;">Save with annual</p>
+                    <p></p>
+                    <hr class="change-line"
+                        style="border: 0 none; border-top: 1px dashed #979797; width:200px;  background: none;  height:0;margin-top:15px;margin-bottom: 15px;">
+                    <p></p>
+                    <p>Join with Call Me! <br> No dialing, no access codes.</p>
+                </div>
+                <a addid="5094414700" class="prod-btn prod-btn-orange one-step-buy" href="javascript:void(0);">Buy
+                    Now</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+</body>
+</html>

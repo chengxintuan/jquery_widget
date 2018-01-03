@@ -1,0 +1,44 @@
+{
+  "monthly-json-1": {
+    "id": "5094412300",
+    "priceTitle": "premium 8",
+    "limit": "Up to 8 people <br/> per meeting",
+    "price": 24,
+    "saveInfo": "$19/month annual plan"
+  },
+  "monthly-json-2": {
+    "id": "5094414400",
+    "priceTitle": "premium 25",
+    "limit": "Up to 25 people <br/> per meeting",
+    "price": 39,
+    "saveInfo": "$29/month annual plan"
+  },
+  "monthly-json-3": {
+    "id": "5094414600",
+    "priceTitle": "premium 8",
+    "limit": "Up to 200 people <br/> per meeting",
+    "price": 49,
+    "saveInfo": "$39/month annual plan"
+  },
+  "annually-json-1": {
+    "id": "5094412400",
+    "priceTitle": "premium 8",
+    "limit": "Up to 8 people <br/> per meeting",
+    "price": 19,
+    "saveInfo": "Save with annual"
+  },
+  "annually-json-2": {
+    "id": "5094414500",
+    "priceTitle": "premium 25",
+    "limit": "Up to 25 people <br/> per meeting",
+    "price": 29,
+    "saveInfo": "Save with annual"
+  },
+  "annually-json-3": {
+    "id": "5094414700",
+    "priceTitle": "premium 200",
+    "limit": "Up to 200 people <br/> per meeting",
+    "price": 39,
+    "saveInfo": "Save with annual"
+  }
+}
