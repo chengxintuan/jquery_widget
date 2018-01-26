@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title><%= title %></title>
+    <style type="text/css">
+        .container {
+            margin: 20px auto;
+            position: relative;
+            border: 10px solid #fff;
+            width: 600px;
+            height: 400px;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            -webkit-box-shadow: 0 0 2px #999;
+            -moz-box-shadow: 0 0 2px #999;
+            box-shadow: 0 0 2px #999;
+        }
+
+        .box {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .box .prev {
+            width: 60px;
+            height: 25px;
+            line-height: 25px;
+            text-align: center;
+            font-size: 14px;
+            color: #ffffff;
+            position: absolute;
+            top: 195px;
+            left: 30px;
+            z-index: 1;
+            background: orange;
+            border: 1px solid orange;
+            outline: none;
+            border-radius: 5px;
+            box-sizing: border-box;
+            padding: 0px;
+        }
+
+        .box .next {
+            padding: 0px;
+            box-sizing: border-box;
+            width: 60px;
+            height: 25px;
+            line-height: 25px;
+            text-align: center;
+            font-size: 14px;
+            background: orange;
+            color: #ffffff;
+            border-radius: 5px;
+            position: absolute;
+            top: 195px;
+            right: 30px;
+            z-index: 1;
+            border: 1px solid orange;
+            outline: none;
+        }
+
+        .box .box-child {
+            position: relative;
+            list-style: none;
+            width: 20000em;
+            top: 0px;
+            margin: 0;
+            padding: 0;
+            left: 0px;
+        }
+
+        .box .box-child li {
+            float: left;
+        }
+
+        .box .box-cursor {
+            position: absolute;
+            bottom: 10px;
+            right: 20px;
+            list-style: none;
+        }
+
+        .box .box-cursor li {
+            float: left;
+            margin-left: 10px;
+        }
+
+        .box .box-cursor li.active .box-cursor-dot {
+            background: orange !important;
+        }
+
+        .box-cursor-dot {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            border: 1px solid #ffffff;
+            line-height: 18px;
+            text-align: center;
+            font-size: 13px;
+            color: #ffffff;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="box">
+        <div class="box-img-container">
+            <input type="button" value="prev" class="prev"/>
+            <ul class="box-child">
+                <% for(var i = 1; i <= imgArr.length; i++) { %>
+                <li data-index="<%= i %>"
+                    class="<% if ( i == 1) { %>active<% } %>"
+                >
+                    <img src="<%= imgArr[i - 1] %>" alt="图片"/>
+                </li>
+                <% } %>
+            </ul>
+            <input type="button" value="next" class="next"/>
+        </div>
+        <div class="box-ctrl">
+            <ul class="box-cursor">
+                <% for(var i = 1; i <= imgArr.length; i++) { %>
+                <li class="<% if ( i == 1) { %>active<% } %>">
+                    <span class="box-cursor-dot"><%= i %></span>
+                </li>
+                <% } %>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+    (function ($) {
+        function Carousel(options) {
+            var settings = {
+                $selector: $('.box'),
+                width: 300
+            };
+
+            settings = $.extend({}, settings, options);
+            var {$selector} = settings;
+            settings.$ul = $selector.find('.box-child');
+            settings.$lis = settings.$ul.find('li');
+            settings.$prev = $selector.find('.prev');
+            settings.$next = $selector.find('.next');
+            settings.$ctrlLis = $selector.find('.box-cursor li');
+
+            this.options = settings;
+
+            this.bindEvent();
+        }
+
+        Carousel.prototype = {
+            slider: function (index) {
+                if (!index) {
+                    return;
+                }
+
+                var cursor = parseInt(index);
+
+                this.changeState(cursor - 1);
+            },
+            prev: function () {
+                var {$lis} = this.options;
+
+                var $activeLi = $lis.closest('.active');
+                var index = parseInt($activeLi.data('index'));
+
+                if (index === 1) {
+                    return;
+                }
+
+                this.changeState(index - 2);
+            },
+            next: function () {
+                var {$lis} = this.options;
+
+                var $activeLi = $lis.closest('.active');
+                var index = parseInt($activeLi.data('index'));
+
+                if (index === $lis.length) {
+                    return;
+                }
+
+                this.changeState(index);
+            },
+            bindEvent: function () {
+                var _self = this;
+                var {$prev, $next, $ctrlLis} = _self.options;
+
+                $prev.on('click', function () {
+                    _self.prev();
+                });
+
+                $next.on('click', function () {
+                    _self.next();
+                });
+
+                $ctrlLis.on('click', function (event) {
+                    var index = $(event.target).text();
+                    _self.slider(index);
+                })
+            },
+            changeState: function (index) {
+                var {width, $ul, $lis, $ctrlLis} = this.options;
+
+                $ul.animate({left: -(width * (index))}, 300);
+                $lis.removeClass('active').eq(index).addClass('active');
+                $ctrlLis.removeClass('active').eq(index).addClass('active');
+            }
+        }
+
+        $.carousel = function (options) {
+            return new Carousel(options);
+        }
+
+
+        $(function () {
+            $.carousel({
+                $selector: $('.box'),
+                width: 600
+            });
+        });
+    })(jQuery);
+</script>
+</body>
+</html>

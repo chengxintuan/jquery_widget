@@ -11,9 +11,6 @@
                     method: 'GET',
                     contentType: 'application/json',
                     dataType: 'jsonp'
-                }).then(function (data) {
-                    $.cookie("DR_SESSION_TOKEN", data.access_token, {expires: 30, path: '/'});
-                    return data;
                 });
             },
             add_prodApi: function (prod_id, quantity) {
@@ -55,22 +52,100 @@
                     error: function (data) {
                         var error_msg = JSON.stringify(data);
                         if (error_msg.indexOf("invalid_token") > 0) {
-                            api.getTokenApi();
+                            cartController.setToken();
                         }
                     },
                 });
             }
         }
 
-        var init = function () {
-            if ($.cookie("DR_SESSION_TOKEN") === undefined) {
-                api.getTokenApi();
+        var cartController = {
+            init: function () {
+                var _self = this;
+
+                if ($.cookie("DR_SESSION_TOKEN") === undefined) {
+                    _self.setToken();
+                }
+            },
+            setToken: function () {
+                api.getTokenApi()
+                    .then(function (res) {
+                        $.cookie("DR_SESSION_TOKEN", res.access_token, {expires: 30, path: '/'});
+                        $.cookie("PRODUCT_LIST", JSON.stringify({total: 0, list: []}), {path: '/'});
+                    })
+            },
+            add_prod: function (prod_id) { /*根据具体需求编写code*/
+                var _self = this;
+                var prodListStr = $.cookie('PRODUCT_LIST');
+                var prodList = !!prodListStr && JSON.parse(prodListStr);
+                var quantity = 0;
+
+                if (prodList.total > 0) {
+                    var item = prodList.list.find(function (_item) {
+                        return _item.id === prod_id;
+                    });
+
+                    quantity = !!item && parseInt(item.quantity);
+                }
+
+                quantity = quantity + 1;
+
+                api.add_prodApi(prod_id, quantity)
+                    .then(function (data) {
+                        _self.update_cookie(data);
+                    });
+
+            },
+            del_prod: function (prod_id) {
+                var _self = this;
+
+                api.del_prodApi(prod_id)
+                    .then(function () {
+                        _self.get_prodList();
+                    });
+            },
+            update_prod: function () {
+
+            },
+            get_prodList: function () {
+                var _self = this;
+                api.getProdListApi()
+                    .then(function (data) {
+                        if (JSON.stringify(data).indexOf('invalid_token') > -1) {
+                            _self.setToken();
+                        } else {
+                            _self.update_cookie(data);
+                        }
+                    })
+            },
+            checkout_prod: function () {
+                api.checkoutApi();
+            },
+            update_cookie: function (data) {
+                var list = [];
+                var total = data.cart.totalItemsInCart;
+
+                if (total > 0) {
+                    var items = obj.cart.lineItems.lineItem || [];
+
+                    list = items.map(function (_item) {
+                        var id = _item.product.uri.replace("https://api.digitalriver.com/v1/shoppers/me/products/", "");
+                        var quantity = _item.quantity;
+
+                        return {
+                            id: id,
+                            quantity: quantity
+                        }
+                    });
+                }
+
+                $.cookie("PRODUCT_LIST", JSON.stringify({
+                    total: total,
+                    list: list
+                }), {path: '/'});
             }
         }
 
-        return {
-            init: init,
-
-        }
+        return cartController;
     })();
 })(jQuery);

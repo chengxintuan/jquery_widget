@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>走马灯</title>
+    <style type="text/css">
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .box {
+            left: 50%;
+            transform: translate(-50%, 0);
+            margin-top: 20px;
+            border: 3px solid black;
+            overflow: hidden;
+            position: absolute;
+            width: 300px;
+            height: 100px;
+            background: orange;
+        }
+
+        ul {
+            position: absolute;
+            list-style: none;
+        }
+
+        li {
+            color: white;
+            line-height: 100px;
+            width: 300px;
+            height: 100px;
+            text-align: center;
+        }
+
+        .child-ul-li1 {
+            background: red;
+        }
+
+        .child-ul-li2 {
+            background: darkslategray;
+        }
+
+        .child-ul-li3 {
+            background: blue;
+        }
+
+        .child-ul-li4 {
+            background: green;
+        }
+
+        .child-ul-li5 {
+            background: purple;
+        }
+
+    </style>
+</head>
+<body>
+<div class="box">
+    <ul class="child-ul">
+        <li class="child-ul-li1">1</li>
+        <li class="child-ul-li2">2</li>
+        <li class="child-ul-li3">3</li>
+        <li class="child-ul-li4">4</li>
+        <li class="child-ul-li5">5</li>
+        <li class="child-ul-li6">6</li>
+    </ul>
+</div>
+
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+    (function ($) {
+
+        strartSetInterval();
+
+        function strartSetInterval() {
+            var $ul = $('.box').find('.child-ul');
+
+            var $lis = $ul.find('li');
+            var height = $lis.eq(0).height();
+
+            var value = height;
+
+            //克隆主要为了实现无限循环，也是无限循环的核心，其他基础知识不再陈述
+            var cloneFirstChild = $lis.eq(0).clone();
+            $ul.append(cloneFirstChild);
+
+            var IntervalMethod = setInterval(function () {
+                var len = $lis.length;
+
+                if (height === (len + 1) * value) {
+                    height = value;
+
+                    $ul.css({"top": '0px'}).animate({'top': -height}, 300);
+                } else {
+                    $ul.animate({'top': -height}, 300);
+                }
+
+                height += value;
+            }, 1500);
+        }
+    })(jQuery);
+</script>
+</body>
+</html>

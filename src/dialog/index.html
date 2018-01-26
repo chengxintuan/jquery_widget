@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>modal plugin</title>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body{
+            /*position: relative;*/
+        }
+        .modal {
+            display: block !important;
+            /*position: absolute;*/
+            /*top: 20px;*/
+            /*left: 40%;*/
+            /*width: 150px;*/
+            /*height: 150px;*/
+            /*cursor: move;*/
+        }
+
+    </style>
+
+</head>
+<body>
+<div>12122132</div>
+
+<script type="text/html" id="content">
+    <p>111111</p>
+    <p>111111</p>
+</script>
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+<script type="text/javascript" src="dialog.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $.modal({
+            content: $('#content').html()
+        });
+    })
+</script>
+</body>
+</html>
